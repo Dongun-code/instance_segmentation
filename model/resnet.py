@@ -48,7 +48,7 @@ class Bottleneck(nn.Module):
 
 class ResNet(nn.Module):
     def __init__(self, architecture, stage5 = False):
-        super(ResNet).__init__()
+        super(ResNet, self).__init__()
         assert architecture in ["resnet50", "resnet101"]
         self.inplanes = 64
         self.layers = [3, 4, {"resnet50":6, "resnet101":23}[architecture], 3]
