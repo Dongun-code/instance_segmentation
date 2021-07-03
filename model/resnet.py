@@ -91,9 +91,12 @@ class ResNet(nn.Module):
 
 
     def forward(self, x):
-        x = self.C1(x)
-        x = self.C2(x)
-        x = self.C3(x)
-        x = self.C4(x)
-        x = self.C5(x)
-        return x
+        features = {
+            'C1' : self.C1(x),
+            'C2' : self.C2(x),
+            'C3' : self.C3(x),
+            'C4' : self.C4(x),
+            'C5' : self.C5(x)
+        }
+
+        return features
