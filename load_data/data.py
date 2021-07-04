@@ -2,7 +2,6 @@
 #   this script is exercise for training
 #   Just write for fun
 
-from torch._C import dtype
 import torch.nn as nn
 import torch
 import os
@@ -13,7 +12,7 @@ import matplotlib.pyplot as plt
 class PennFudanDataset(torch.utils.data.Dataset):
     def __init__(self, root, transforms):
         self.root =root
-        self.transforms = transform
+        self.transforms = transforms
         #   load all image files, sorting them to
         #   ensure that they are aligned
         self.imgs = list(sorted(os.listdir(os.path.join(root, "PNGImages"))))
@@ -70,8 +69,8 @@ class PennFudanDataset(torch.utils.data.Dataset):
         target["area"] = area
         target["iscrowd"] = iscrowd
 
-        if self.transform is not None:
-            img, target = self.transforms(img, target)
+        # if self.transform is not None:
+        #     img, target = self.transforms(img, target)
 
         return img, target
 
@@ -81,7 +80,8 @@ class PennFudanDataset(torch.utils.data.Dataset):
 if __name__ == "__main__":
     path = "/home/milab/machine_ws/Semantic Segmentation/Dataset/PennFudanPed"
     penn = PennFudanDataset(path, 'trans')
-    img = penn[0]
+    img = penn
+
 
 
 

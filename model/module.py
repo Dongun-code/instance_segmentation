@@ -3,6 +3,8 @@ import torch.nn.functional as F
 import math
 import torch
 import numpy as np
+from torch.autograd.variable import Variable
+
 class SamePad2d(nn.Module):
     """Mimics tensorflow's 'SAME' padding.
     """
@@ -89,3 +91,11 @@ def generate_pyramid_anchors(scales, ratios, features_shapes, features_strides, 
         anchors.append(generate_anchors(scales[i], ratios, features_shapes[i],
                                         features_strides[i], anchor_stride))
     return np.concatenate(anchors, axis=0)
+
+
+def log2(x):
+    """Implementatin of Log2. Pytorch doesn't have a native implemenation."""
+    ln2 = Variable(torch.log(torch.FloatTensor([2.0])), requires_grad=False)
+    if x.is_cuda:
+        ln2 = ln2.cuda()
+    return torch.log(x) / ln2
