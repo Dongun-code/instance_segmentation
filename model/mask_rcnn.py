@@ -12,12 +12,10 @@ class MaskRcnn:
         pass
 
     def structure(self, input_tensor):
-        
         #   ResNet
         resnet = ResNet("resnet101",stage5 = True)
         stage = resnet.stage5
         C1, C2, C3, C4, C5 = stage
-
         #   FPN
         fpn = FPN(C1, C2, C3, C4, C5, out_channels = 256)
 
@@ -28,7 +26,6 @@ class MaskRcnn:
                                                                  cfg.BACKBONE_STRIDES)).float(), requires_grad=False)
 
         self.anchors = self.anchors.cuda()                                                                 
-
         #   RPN
         rpn = RPNet(len(cfg.RPN_ANCHOR_RATIOS), cfg.RPN_ANCHOR_STRIDE, 256)
 

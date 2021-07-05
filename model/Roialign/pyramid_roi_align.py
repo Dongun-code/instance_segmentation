@@ -46,3 +46,7 @@ def pyramid_roi_align(inputs, pool_size, image_shape):
         roi_level = roi_level.round().int()
         roi_level = roi_level.clamp(2,5)
 
+class RoiAlign_torch(self):
+    def __init__(self):
+        super().__init__()
+        pass
